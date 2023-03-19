@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Itim:wght@300;400;500;600;700&family=Sassy+Frass:wght@400;500;600&family=Rubik:wght@400;500;600;700&family=Sono&display=swap"
+      rel="stylesheet"
+    />
+
+    <link href="{%static 'css/Fav.css'%}" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div class="navigation">
+      <div class="svg">
+        <ion-icon name="home-outline"></ion-icon>
+        <a href="{% url 'api_searchs' %}">Home</a>
+      </div>
+      <div class="svg">
+        <ion-icon name="star-outline"></ion-icon>
+        <a href="{% url 'Fav' %}">Your fav</a>
+      </div>
+      <div class="svg">
+        <ion-icon name="person-outline"></ion-icon>
+        <a href="{% url 'Fav' %}">Account</a>
+      </div>
+      <div class="svg">
+        <ion-icon name="log-in-outline"></ion-icon>
+        <a href="{% url 'logout' %}">logout</a>
+      </div>
+    </div>
+    <h1>Your Fav</h1>
+    <div class="Fav">
+      {% for hm in data %} <div class="script" id="script" data-url="{% url
+      "Fav" %}" onclick="recipe('{{hm.ids}}','{{hm.image}}','{{hm.name}}')"
+      onmouseover="cancelicon('{{hm.ids}}')" >
+      <form method="post" action="../favoratie/">
+        {% csrf_token %}
+        <input type="hidden" value="{{hm.ids}}" name="id" />
+        <button class="cancelicon" id="{{hm.ids}}">
+          <ion-icon name="close-circle-outline"></ion-icon>
+        </button>
+      </form>
+      <div class="card">
+        <div class="history-img">
+          <img src="{{hm.image}}" />
+        </div>
+        <p>{{hm.name}}</p>
+      </div>
+    </div>
+    {%endfor%} {% if length == 0%}
+    <p class="nofavtext">
+      “No Favs Here, you can add them by pressing like on the recipe section”
+    </p>
+    {%endif%}
+  </body>
+  <script
+    type="module"
+    src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+  ></script>
+  <script
+    nomodule
+    src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+  ></script>
+  <script src="{% static 'javascript/display.js' %}"></script>
+</html>

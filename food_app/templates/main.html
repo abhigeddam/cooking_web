@@ -1,0 +1,161 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <meta charset="UTF-8" />
+  <title>cook like a pro</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Itim:wght@300;400;500;600;700&family=Sassy+Frass:wght@400;500;600&family=Rubik:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link href="{%static 'css/main.css'%}" rel="stylesheet" />
+  <style></style>
+  <body>
+    <div class="db-form" id="db-form">
+      <div class="db-box">
+        <form
+          method="post"
+          action="../../db/account/"
+          enctype="multipart/form-data"
+        >
+          {% csrf_token %}
+          <div class="form-group" id="form-name">
+            <label for="name">Title </label>
+            {{form.name}}
+          </div>
+          <div class="form-group">
+            <label for="image">Steps</label>
+            {{form.steps}}
+          </div>
+          <div class="form-group">
+            <label for="images">Images</label>
+            <div class="upload-btn-wrapper">
+              <button type="button" class="btn">Upload a file</button>
+              {{form.image}}
+            </div>
+          </div>
+          <button class="post-button" type="submit">post</button>
+        </form>
+      </div>
+    </div>
+    <div class="navigation">
+      <div class="svg">
+        <ion-icon name="home-outline"></ion-icon>
+        <a href="{% url 'api_searchs' %}">Home</a>
+      </div>
+      <div class="svg">
+        <ion-icon name="star-outline"></ion-icon>
+        <a href="{% url 'Fav' %}">Your fav</a>
+      </div>
+      <div class="svg">
+        <ion-icon name="person-outline"></ion-icon>
+        <a href="{% url 'Fav' %}">Account</a>
+      </div>
+      <div class="svg">
+        <ion-icon name="log-in-outline"></ion-icon>
+        <a href="{% url 'logout' %}">logout</a>
+      </div>
+    </div>
+    <form id="forms" method="POST">
+      {% csrf_token %}
+      <div class="main">
+        <h2>cook like a pro</h2>
+        <div class="search-box">
+          <div class="main-search">
+            <input
+              type="text"
+              id="search"
+              name="search"
+              placeholder="Jesse,let's cook!!..."
+            />
+            <button type="submit" id="jii">search</button>
+            <button id="filter-button" onclick="filters()" type="button">
+              <ion-icon name="filter-outline"></ion-icon>
+            </button>
+          </div>
+        </div>
+        <div id="filters">
+          <label for="Cusines">Choose a cusine:</label>
+          <select id="Cusines" name="Cusines">
+            <option value="">None</option>
+            {%for hm in x%}
+            <option value="{{hm.cusine}}">{{hm.cusine}}</option>
+            {%endfor%}
+          </select>
+          <label for="Diets">Choose a Diet:</label>
+          <select id="Diet" name="Diet">
+            <option value="">None</option>
+            {%for hm in y%}
+            <option value="{{hm.diet}}">{{hm.diet}}</option>
+            {%endfor%}
+          </select>
+          <label for="Avoid">Choose Intolerances:</label>
+          <select id="Avoid" name="Avoid">
+            <option value="">None</option>
+            {%for hm in a%}
+            <option value="{{hm.avoid}}">{{hm.avoid}}</option>
+            {%endfor%}
+          </select>
+        </div>
+        <div class="contribute">
+          <div class="contribute-Text-box">
+            <p class="contribute-Text">
+              “We make a living by what we get, but we make a life by what we
+              give”
+            </p>
+          </div>
+          <div class="contribute-button-box">
+            <button
+              type="button"
+              onclick="contribute()"
+              class="contribute-button"
+            >
+              contribute
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="history">
+      <h3>History</h3>
+      <div class="history-cont">
+        <div class="history-cards">
+          {% if n1 != '/'%}
+          <div class="card">
+            <div class="history-img">
+              <img src="{{i1}}" />
+            </div>
+            <p>{{n1}}</p>
+          </div>
+          {% endif %} {% if n2 != '/'%}
+          <div class="card">
+            <div class="history-img">
+              <img src="{{i2}}" />
+            </div>
+            <p>{{n2}}</p>
+          </div>
+          {%endif%} {%if n3 != '/'%}
+          <div class="card">
+            <div class="history-img">
+              <img src="{{i3}}" />
+            </div>
+            <p>{{n3}}</p>
+          </div>
+          {%endif%}
+        </div>
+      </div>
+    </div>
+  </body>
+  <script
+    type="module"
+    src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+  ></script>
+  <script
+    nomodule
+    src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+  ></script>
+
+  <script src="{% static 'javascript/main.js' %}"></script>
+</html>

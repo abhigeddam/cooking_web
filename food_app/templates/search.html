@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Itim:wght@300;400;500;600;700&family=Sassy+Frass:wght@400;500;600&family=Rubik:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link href="{%static 'css/search.css'%}" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div class="navigation">
+      <div class="svg">
+        <ion-icon name="star-outline"></ion-icon>
+        <a href="{% url 'Fav' %}">Your fav</a>
+      </div>
+      <div class="svg">
+        <ion-icon name="person-outline"></ion-icon>
+        <a href="{% url 'Fav' %}">Account</a>
+      </div>
+      <div class="svg">
+        <ion-icon name="log-in-outline"></ion-icon>
+        <a href="{% url 'logout' %}">logout</a>
+      </div>
+    </div>
+    <h1>Recipe</h1>
+    <div class="Fav">
+      {% if i == 1 %} {%for hm in response%}
+      <div
+        class="script"
+        onclick="recipe('{{hm.id}}','{{hm.image}}','{{hm.title}}')"
+      >
+        <div class="card">
+          <div class="history-img">
+            <img src="{{hm.image}}" />
+          </div>
+          <p>{{hm.title}}</p>
+        </div>
+      </div>
+      {%endfor%} {%endif%} {%if i == 0 %} {%for hm in response%}
+      <div
+        class="script"
+        onclick="recipeinternal('{{hm.id}}','{{hm.image}}','{{hm.name}}')"
+      >
+        <div class="card">
+          <div class="history-img">
+            <img src="{{hm.image}}" />
+          </div>
+          <p>{{hm.name}}</p>
+        </div>
+      </div>
+      {%endfor%}{%endif%}
+    </div>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+    <script src="{% static 'javascript/recipe.js' %}"></script>
+  </body>
+</html>

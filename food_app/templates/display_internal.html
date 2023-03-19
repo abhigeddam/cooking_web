@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <meta charset="UTF-8" />
+  <title>tasty recipe</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="{%static 'css/display.css'%}" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Itim&family=Sassy+Frass&family=Source+Sans+Pro:ital,wght@0,200;0,300;1,200;1,300&family=Tilt+Neon&display,wght@0,200;0,300=swap"
+    rel="stylesheet"
+  />
+  <style></style>
+  <body>
+    <div class="navigation">
+      <div class="svg">
+        <ion-icon name="home-outline"></ion-icon>
+        <a href="{% url 'api_searchs' %}">Home</a>
+      </div>
+      <div class="svg">
+        <ion-icon name="star-outline"></ion-icon>
+        <a href="{% url 'Fav' %}">Your fav</a>
+      </div>
+      <div class="svg">
+        <ion-icon name="person-outline"></ion-icon>
+        <a href="{% url 'Fav' %}">Account</a>
+      </div>
+      <div class="svg">
+        <ion-icon name="log-in-outline"></ion-icon>
+        <a href="{% url 'logout' %}">logout</a>
+      </div>
+    </div>
+    <div class="cont">
+      <div class="main-name">
+        <h1>{{name}}</h1>
+        <button
+          class="like-button"
+          onclick="Fav('{{id}}','{{image}}','{{name}}')"
+        >
+          ❤
+        </button>
+      </div>
+      <div class="cnt-img-vid">
+        <div class="reciepe-image">
+          <img src="{{image}}" />
+        </div>
+        <iframe width="600" height="315" src="{{video}}"> </iframe>
+      </div>
+      <div>
+        <p>'{{steps}}'</p>
+      </div>
+      {%endfor%}
+    </div>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script <script src="{% static 'javascript/display.js' %}"></script>
+  </body>
+</html>
