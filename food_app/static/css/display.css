@@ -99,3 +99,11 @@ h1 {
   background-color: #f8f9fa;
   padding-bottom: 1px;
 }
+.internalsteps {
+  margin-top: 3rem;
+  font-size: 1.5rem;
+  font-family: Sono;
+}
+.internalsteps p {
+  padding-top: 2rem;
+}

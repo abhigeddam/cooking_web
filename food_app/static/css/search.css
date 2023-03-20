@@ -32,6 +32,11 @@ body {
   width: 100%;
   object-fit: contain;
 }
+.history-img {
+  height: 226px;
+  width: 300px;
+}
+
 .script {
   display: inline-block;
   width: 30rem;

@@ -47,11 +47,11 @@
       {%endfor%} {%endif%} {%if i == 0 %} {%for hm in response%}
       <div
         class="script"
-        onclick="recipeinternal('{{hm.id}}','{{hm.image}}','{{hm.name}}')"
+        onclick="recipeinternal('{{hm.id}}','{{hm.image.url}}','{{hm.name}}')"
       >
         <div class="card">
           <div class="history-img">
-            <img src="{{hm.image}}" />
+            <img src="{{hm.image.url}}" />
           </div>
           <p>{{hm.name}}</p>
         </div>

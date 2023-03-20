@@ -85,16 +85,16 @@ def account(request):
 def api_display_internal(request):
     if request.method == "GET":
         data = request.GET
-        ids = data.get('ids')
+        ids = data.get('id')
         image = data.get('image')
-        name = data.get('title')
-        x = Reciepes.filter(ids=ids).first()
+        name = data.get('name')
+        x = Reciepes.objects.all().filter(id=ids).first()
         steps = x.steps
         urls = 'https://youtube.googleapis.com/youtube/v3/search'
         payloads = {'regionCode':'us','q':name,'key':'AIzaSyAwCqp0AE43pxZnyOPjmcE70QJp-92Yli8'}
         send = requests.get(urls,payloads).json()
         send = send['items'][0]['id']['videoId']
         send = 'https://www.youtube.com/embed/' + send
-        return render(request,'display_internal.html',{'name':title,'steps':steps,'image':image,'video':send,'id':ids})
+        return render(request,'display_internal.html',{'name':name,'steps':steps,'image':image,'video':send,'id':ids})
 
 

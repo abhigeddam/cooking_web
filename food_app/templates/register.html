@@ -6,16 +6,40 @@
     <title></title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link href="" rel="stylesheet" />
+    <link href="{%static 'css/registration.css'%}" rel="stylesheet" />
   </head>
 
   <body>
-    <form method="POST">
-      {% csrf_token %} {{form.username.label}} {{form.username}}
-      {{form.email.label}} {{form.email}} {{form.password1.label}}
-      {{form.password1}} {{form.password2.label}} {{form.password2}}
-      <button type="submit">submit</button>
-    </form>
-    <a href="/authentication/login/">login</a>
+    <div class="container">
+      <div class="title">Registration</div>
+      <div class="content">
+        <form method="POST">
+          <div class="user-details">
+            <div class="input-box">
+              <span class="details">UserName</span>
+              {{form.username}}
+            </div>
+            <div class="input-box">
+              <span class="details">Email</span>
+              {{form.email}}
+            </div>
+            <div class="input-box">
+              <span class="details">Password</span>
+              {{form.password1}}
+            </div>
+            <div class="input-box">
+              <span class="details">Confirm Password</span>
+              {{form.password2}}
+            </div>
+          </div>
+          <div class="submission">
+            <button class="button-1" role="button">register</button>
+            <a class="button-1" role="button" href="/authentication/login/"
+              >login</a
+            >
+          </div>
+        </form>
+      </div>
+    </div>
   </body>
 </html>
