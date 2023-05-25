@@ -3,6 +3,7 @@ from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
 from .form import CreateUserForm
+from database.models import Profile
 
 # Create your views here.
 def register(request):
@@ -10,7 +11,9 @@ def register(request):
     if request.method == 'POST':
         response = CreateUserForm(request.POST)
         if response.is_valid():
-            response.save()
+            x = response.save()
+            y = Profile(user=x)
+            y.save()
         else:
             print('no dude')
     context = {'form':form}

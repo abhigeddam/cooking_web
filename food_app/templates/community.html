@@ -1,0 +1,51 @@
+{% load static%}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Itim:wght@300;400;500;600;700&family=Sassy+Frass:wght@400;500;600&family=Rubik:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="{%static 'css/community.css'%}" rel="stylesheet" />
+  </head>
+  {% include 'navigation.html' %}
+  <body>
+    <form method="post">
+      {% csrf_token %}
+      <input type="text" placeholder="Search..." required name="name" />
+      <button type="submit">Search</button>
+    </form>
+  </body>
+  {%for hm in data %}
+  <div class="post_container">
+    <div class="post">
+      <div class="post-header">
+        {% if hm.2 %}
+        <img src="{{hm.2.url}}" alt="Profile picture" />
+        {% else %}
+        <img src="{%static 'media/download.jpg'%}" />
+        {%endif%}
+        <div class="post-info">
+          <h5>{{hm.1}}</h5>
+          <p>posted on: {{hm.0.created_at}}</p>
+        </div>
+      </div>
+      <div class="post-content">
+        <div class="post-right">
+          <h2>{{hm.0.name}}</h2>
+          <img src="{{hm.0.image.url}}" />
+        </div>
+        <div class="post-description">"{{hm.0.description}}"</div>
+      </div>
+      <div class="post-actions">
+        <a href="#"><i class="far fa-thumbs-up"></i> ↑ Upvote</a>
+        <a href="#"><i class="far fa-comment"></i> ↓ Downvote</a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</html>

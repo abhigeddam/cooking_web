@@ -11,7 +11,7 @@
     rel="stylesheet"
   />
   <link href="{%static 'css/main.css'%}" rel="stylesheet" />
-  <style></style>
+  <link href="{%static 'css/navigation.css'%}" rel="stylesheet" />
   <body>
     <div class="db-form" id="db-form">
       <div class="db-box">
@@ -24,6 +24,10 @@
           <div class="form-group" id="form-name">
             <label for="name">Title </label>
             {{form.name}}
+          </div>
+          <div class="form-group">
+            <label for="image">Description</label>
+            {{form.description}}
           </div>
           <div class="form-group">
             <label for="image">Steps</label>
@@ -40,24 +44,53 @@
         </form>
       </div>
     </div>
-    <div class="navigation">
-      <div class="svg">
-        <ion-icon name="home-outline"></ion-icon>
-        <a href="{% url 'api_searchs' %}">Home</a>
-      </div>
-      <div class="svg">
-        <ion-icon name="star-outline"></ion-icon>
-        <a href="{% url 'Fav' %}">Your fav</a>
-      </div>
-      <div class="svg">
-        <ion-icon name="person-outline"></ion-icon>
-        <a href="{% url 'Fav' %}">Account</a>
-      </div>
-      <div class="svg">
-        <ion-icon name="log-in-outline"></ion-icon>
-        <a href="{% url 'logout' %}">logout</a>
+    <div>
+      <link rel="stylesheet" href="{% static 'css/navigation.css'%}" />
+      <div class="navigation">
+        <div class="svg">
+          <ion-icon name="home-outline"></ion-icon>
+          <a href="{% url 'api_searchs' %}">Home</a>
+        </div>
+        <div class="svg">
+          <ion-icon name="star-outline"></ion-icon>
+          <a href="{% url 'Fav' %}">Your fav</a>
+        </div>
+        <div class="svg">
+          <ion-icon name="people-outline"></ion-icon>
+          <a href="{% url 'community' %}">Community</a>
+        </div>
+        <div class="svg">
+          <ion-icon name="person-outline"></ion-icon>
+          <a href="#" onclick="account()"> Account </a>
+        </div>
+        <div class="svg">
+          <ion-icon name="log-in-outline"></ion-icon>
+          <a href="{% url 'logout' %}">logout</a>
+        </div>
       </div>
     </div>
+    <div class="account-container" id="account-container">
+      <div class="account" id="account">
+        <div class="cover-page">
+          {% if Profile.image %}
+          <img src="{{Profile.image.url}}" />
+          {% else %}
+          <img src="{%static 'media/download.jpg'%}" />
+          {% endif %}
+        </div>
+        <div class="account-content">
+          <h3>{{Profile.user.username}}</h3>
+          <div class="relation-container">
+            <a>Followers:{{followers}}</a>
+            <a>following:{{following}}</a>
+          </div>
+          <p>No.of searches left:{{Profile.searches_left}}</p>
+          <p>Coins:{{Profile.coins}}</p>
+          <p>recipes shared:{{Recipes}}</p>
+        </div>
+      </div>
+    </div>
+
     <form id="forms" method="POST">
       {% csrf_token %}
       <div class="main">
@@ -119,6 +152,21 @@
       </div>
     </form>
     <div class="history">
+      <h3>Trending</h3>
+      {%for hm in Trending %}
+      <div class="history-cont">
+        <div class="history-cards">
+          <div class="card">
+            <div class="history-img">
+              <img src="{{hm.image}}" />
+            </div>
+            <p>{{hm.item}}</p>
+          </div>
+        </div>
+      </div>
+      {%endfor%}
+    </div>
+    <div class="history">
       <h3>History</h3>
       <div class="history-cont">
         <div class="history-cards">
@@ -156,6 +204,5 @@
     nomodule
     src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
   ></script>
-
   <script src="{% static 'javascript/main.js' %}"></script>
 </html>

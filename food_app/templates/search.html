@@ -16,20 +16,7 @@
   </head>
 
   <body>
-    <div class="navigation">
-      <div class="svg">
-        <ion-icon name="star-outline"></ion-icon>
-        <a href="{% url 'Fav' %}">Your fav</a>
-      </div>
-      <div class="svg">
-        <ion-icon name="person-outline"></ion-icon>
-        <a href="{% url 'Fav' %}">Account</a>
-      </div>
-      <div class="svg">
-        <ion-icon name="log-in-outline"></ion-icon>
-        <a href="{% url 'logout' %}">logout</a>
-      </div>
-    </div>
+    {% include 'navigation.html' %}
     <h1>Recipe</h1>
     <div class="Fav">
       {% if i == 1 %} {%for hm in response%}

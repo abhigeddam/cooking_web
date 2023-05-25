@@ -26,6 +26,11 @@ class Reciepes(models.Model):
     name = models.CharField(max_length=99999999)
     image = models.ImageField(upload_to='user_recipes/')
     steps = models.CharField(max_length=99999999999)
-    user_id = models.ForeignKey(User,blank=True, on_delete=models.CASCADE)
+    description = models.CharField(max_length=999999)
+    user_id = models.ForeignKey(User,blank=True, on_delete=models.CASCADE,related_name='recipes')
     upvotes = models.IntegerField(default=0,blank=True)
-    
+    created_at = models.DateTimeField(auto_now_add=True)
+class Trending(models.Model):
+    item = models.CharField(max_length=99999999)
+    ids = models.IntegerField(default=0,blank=True)
+    image = models.CharField(max_length=99999999999)

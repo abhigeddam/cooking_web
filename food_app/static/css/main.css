@@ -27,7 +27,7 @@ body {
 .db-box {
   margin: auto;
   width: 50%;
-  height: 50%;
+  height: 63%;
   background-color: #e9ecef;
   text-align: center;
 }
@@ -95,28 +95,6 @@ body {
   display: flex;
   margin-right: 5rem;
   margin-left: 10rem;
-}
-.navigation {
-  display: flex;
-  padding-left: 5rem;
-  margin-bottom: 4rem;
-  background-color: #e9ecef;
-  border-radius: 1rem;
-  justify-content: center;
-  align-items: center;
-}
-.navigation a {
-  text-decoration: none;
-  font-size: 2rem;
-  padding: 1rem;
-  margin-right: 3rem;
-  color: #5c940d;
-  padding-right: 2rem;
-}
-.svg {
-  display: flex;
-  justify-items: center;
-  align-items: center;
 }
 form h2 {
   text-align: center;
@@ -202,6 +180,13 @@ form h2 {
   text-align: start;
   border-radius: 0.3rem;
 }
+.db-description {
+  width: 80%;
+  height: 3rem;
+  font-size: 1.2rem;
+  text-align: start;
+  border-radius: 0.3rem;
+}
 .contribute-button {
   width: 10rem;
   padding: 10px;
@@ -245,4 +230,62 @@ form h2 {
   border: 1px solid grey;
   border-left: none;
   cursor: pointer;
+}
+.account {
+  width: 25rem;
+  height: 40rem;
+  overflow: hidden;
+  position: absolute;
+  z-index: 2;
+  left: 72rem;
+  top: 5rem;
+  border-radius: 1rem;
+  background-color: #f8f9fa;
+}
+
+.cover-page {
+  height: 30%;
+  width: 100%;
+  position: relative;
+  background-color: #69db7c;
+}
+.account img {
+  width: 8rem;
+  height: 8rem;
+  border-radius: 50%;
+  object-fit: fill;
+  position: absolute;
+  top: 70%;
+  left: 33%;
+}
+.account-content {
+  height: 70%;
+  width: 100%;
+  text-align: center;
+  padding-top: 5rem;
+  font-family: sans-serif;
+}
+.account-content h3 {
+  font-size: 1.9rem;
+  font-weight: 600;
+  padding-bottom: 0.6rem;
+}
+.account-content p {
+  font-size: 1.3rem;
+  padding-bottom: 6px;
+}
+.account-container {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(0.3rem);
+  display: none;
+}
+.relation-container {
+  margin-bottom: 3rem;
 }

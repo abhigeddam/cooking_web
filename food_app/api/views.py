@@ -4,7 +4,8 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 import requests
 import json
-from food_app.models import Cusines,Diet,Intolerences,Person_food,Reciepes
+from food_app.models import Cusines,Diet,Intolerences,Person_food,Reciepes,Trending
+from database.models import Profile
 from .functions import historyChange
 from django.contrib.auth.models import User
 from food_app.form import *
@@ -18,6 +19,7 @@ def api_post(request):
         Avoid = request.GET.get('avoid')
         data = Reciepes.objects.all().filter(name__contains=search)
         if len(data) > 0:
+            print(data[0].image)
             return render(request, 'search.html',{'response':data,'i':0})
         else:
             payload = {'apiKey':"149a99cd6a4c423886643debcbdec074",'query':search,'cuisine':Cusine,'diet':Diets,'intolerances':Avoid}
@@ -30,11 +32,14 @@ def api_search(request):
     x = Cusines.objects.all()
     y = Diet.objects.all()
     a = Intolerences.objects.all()
-    z = request.session.get('user','')
-    user = User.objects.get(username=z)
-    print(user.email)
+    z = request.session.get('id','')
+    user = User.objects.get(id=z)
+    Reciepes_shared = len(user.recipes.all())
+    profile = Profile.objects.get(user=user)
+    following = len(profile.following.all())
+    followers = len(user.followers.all())
     data = Person_food.objects.filter(user_id=user).first()
-    print(data)
+    trending = Trending.objects.all()
     if data != None:
         r1,r2,r3 = data.last_reciepe1.split('??'),data.last_reciepe2.split('??'),data.last_reciepe3.split('??')
     else:
@@ -47,7 +52,7 @@ def api_search(request):
         Diets = request.POST['Diet']
         avoid = request.POST['Avoid']
         return HttpResponseRedirect('/api/list/?query={q}&Cusine={c}&Diet={d}&avoid={a}'.format(q=query, c=Cusine,d = Diets,a=avoid))
-    return render(request,'main.html',{'x':x,'y':y,'a':a,'z':z,'n1':r1[0],'n2':r2[0],'n3':r3[0],'i1':r1[1],'i2':r2[1],'i3':r3[1],'form':form})
+    return render(request,'main.html',{'x':x,'y':y,'a':a,'z':z,'n1':r1[0],'n2':r2[0],'n3':r3[0],'i1':r1[1],'i2':r2[1],'i3':r3[1],'form':form,'Trending':trending,'Profile':profile,'Recipes':Reciepes_shared,'following':following,'followers':followers})
 @login_required(login_url='logins')
 def api_display(request):
     if request.method == "GET":

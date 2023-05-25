@@ -11,8 +11,16 @@ const contribute = () => {
   var x = document.getElementById("db-form");
   x.style.display = "flex";
 };
+const account = () => {
+  var x = document.getElementById("account-container");
+  x.style.display = "block";
+};
 window.onclick = function (event) {
-  var x = document.getElementById("db-form");
+  var x = document.getElementById("account-container");
+  var y = document.getElementById("db-form");
+  if (event.target == x) {
+    y.style.display = "none";
+  }
   if (event.target == x) {
     x.style.display = "none";
   }

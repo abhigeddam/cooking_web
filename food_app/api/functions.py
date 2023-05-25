@@ -13,3 +13,4 @@ def historyChange(request,name,img):
             data.last_reciepe3 = x
             data.last_reciepe1 = l
             data.save()
+
