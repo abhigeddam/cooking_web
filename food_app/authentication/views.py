@@ -14,8 +14,10 @@ def register(request):
             x = response.save()
             y = Profile(user=x)
             y.save()
+            messages.success(request, "registration successful")
+            redirect('logins')
         else:
-            print('no dude')
+            messages.error(request, "password must contain 8 charecters and a special character")
     context = {'form':form}
     return render(request,'register.html',context)
 
@@ -31,7 +33,7 @@ def logins(request):
             username = user.get_username()
             return redirect('api_searchs')
         else:
-            messages.info(request,'password or username is incorrect')
+            messages.error(request,'password or username is incorrect')
             print('oopss')
             return redirect('logins')
     return render(request,'login.html',{'register':'register'})

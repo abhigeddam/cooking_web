@@ -1,0 +1,12 @@
+{% load static%}
+<link href="{%static 'css/messages.css'%}" rel="stylesheet" />
+{% if messages%}
+<div class="messages-container">
+  <div class="messages">
+    {% for message in messages%}
+    <p class="message {{ message.tags }} " id="msg" role="alert">
+      {{ message}}
+    </p>
+    {% endfor %} {% endif %}
+  </div>
+</div>

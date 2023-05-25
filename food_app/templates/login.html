@@ -30,6 +30,9 @@
           <a href="../register/">register</a>
         </div>
       </form>
+      <div id="content">
+        {% include 'messages.html' %} {% block content %}{% endblock content%}
+      </div>
     </div>
   </body>
 </html>
