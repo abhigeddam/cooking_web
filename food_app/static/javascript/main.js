@@ -18,7 +18,7 @@ const account = () => {
 window.onclick = function (event) {
   var x = document.getElementById("account-container");
   var y = document.getElementById("db-form");
-  if (event.target == x) {
+  if (event.target == y) {
     y.style.display = "none";
   }
   if (event.target == x) {

@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <link rel="stylesheet" href="{%static 'css/shop.css'%}" />
+  <body>
+    {% include 'navigation.html' %}
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sassy+Frass:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <header>
+      <h1>Spend Coins for Extra Searhes/Features</h1>
+    </header>
+
+    <main>
+      <h2>Store</h2>
+      <div class="card">
+        <p>You have <span class="coinCount">{{coins}}</span> coins.</p>
+        <p>Buy 5 searches</p>
+        <p>Current searches: {{searches}}</p>
+        <button class="spendButton">Spend 50 Coins</button>
+      </div>
+    </main>
+
+    <footer>
+      <p>&copy; Created with Love by Abhiram. All rights reserved.</p>
+    </footer>
+  </body>
+</html>

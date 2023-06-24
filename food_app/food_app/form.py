@@ -32,5 +32,5 @@ class Main_receipe_Form(forms.ModelForm):
  
     class Meta:
         model = Reciepes
-        fields = ['name', 'image','steps','user_id']
+        fields = ['name', 'image','steps','user_id','description']
 

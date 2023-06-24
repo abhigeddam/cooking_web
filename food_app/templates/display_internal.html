@@ -38,7 +38,7 @@
           class="like-button"
           onclick="Fav('{{id}}','{{image}}','{{name}}')"
         >
-          ❤
+          ♡
         </button>
       </div>
       <div class="cnt-img-vid">
@@ -49,7 +49,9 @@
       </div>
       <div class="internalsteps">
         <h2>Procedure</h2>
-        <p>'{{steps}}'</p>
+        {% for hm in steps%}
+        <p>{{hm}}</p>
+        {%endfor%}
       </div>
     </div>
     <script

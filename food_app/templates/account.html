@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -5,8 +6,38 @@
     <title></title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link href="" rel="stylesheet" />
+    <link href="{%static 'css/account.css'%}" rel="stylesheet" />
   </head>
 
-  <body></body>
+  <body>
+    <div class="account-page">
+      <div class="upper">
+        <div class="cover"></div>
+        <p>abhiram</p>
+        <div class="image-container">
+          <img class="account-image" src="{%static 'media/download.jpg'%}" />
+        </div>
+      </div>
+      <div class="lower">
+        <div class="info"></div>
+        {% for hm in data%}
+        <div class="post_container">
+          <div class="post">
+            <div class="post-content">
+              <div class="post-right">
+                <h2>{{hm.name}}</h2>
+                <img src="{{hm.image.url}}" />
+              </div>
+              <div class="post-description">"{{hm.description}}"</div>
+            </div>
+            <div class="post-actions">
+              <a href="#"><i class="far fa-thumbs-up"></i> ↑ Upvote</a>
+              <a href="#"><i class="far fa-comment"></i> ↓ Downvote</a>
+            </div>
+          </div>
+        </div>
+        {%endfor%}
+      </div>
+    </div>
+  </body>
 </html>

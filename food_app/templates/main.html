@@ -17,7 +17,7 @@
       <div class="db-box">
         <form
           method="post"
-          action="../../db/account/"
+          action="../../db/submit/"
           enctype="multipart/form-data"
         >
           {% csrf_token %}
@@ -153,18 +153,18 @@
     </form>
     <div class="history">
       <h3>Trending</h3>
-      {%for hm in Trending %}
-      <div class="history-cont">
+      <div class="trending-cont">
         <div class="history-cards">
+          {%for hm in Trending %}
           <div class="card">
             <div class="history-img">
               <img src="{{hm.image}}" />
             </div>
             <p>{{hm.item}}</p>
           </div>
+          {%endfor%}
         </div>
       </div>
-      {%endfor%}
     </div>
     <div class="history">
       <h3>History</h3>

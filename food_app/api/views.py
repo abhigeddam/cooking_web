@@ -6,7 +6,7 @@ import requests
 import json
 from food_app.models import Cusines,Diet,Intolerences,Person_food,Reciepes,Trending
 from database.models import Profile
-from .functions import historyChange
+from .functions import historyChange,trendChange
 from django.contrib.auth.models import User
 from food_app.form import *
 # Create your views here.
@@ -40,6 +40,7 @@ def api_search(request):
     followers = len(user.followers.all())
     data = Person_food.objects.filter(user_id=user).first()
     trending = Trending.objects.all()
+    trending = Trending.objects.all()[:3]
     if data != None:
         r1,r2,r3 = data.last_reciepe1.split('??'),data.last_reciepe2.split('??'),data.last_reciepe3.split('??')
     else:
@@ -56,6 +57,15 @@ def api_search(request):
 @login_required(login_url='logins')
 def api_display(request):
     if request.method == "GET":
+        y = request.session.get('id','')
+        user = Profile.objects.get(user__id=y)
+        if user.searches_left <= 0:
+            return redirect('Shop')
+
+        else:
+            user.searches_left -= 1
+            user.save()
+
         data = request.GET
         id = data.get('id')
         image = data.get('image')
@@ -66,12 +76,14 @@ def api_display(request):
         url = url + id + '/analyzedInstructions'
         response = requests.get(url,payload).json()
         urls = 'https://youtube.googleapis.com/youtube/v3/search'
-        payloads = {'regionCode':'us','q':name,'key':'AIzaSyAwCqp0AE43pxZnyOPjmcE70QJp-92Yli8'}
+        payloads = {'regionCode':'us','q':name+" recipe",'key':'AIzaSyAwCqp0AE43pxZnyOPjmcE70QJp-92Yli8'}
         send = requests.get(urls,payloads).json()
         send = send['items'][0]['id']['videoId']
         send = 'https://www.youtube.com/embed/' + send
         print(send)
         historyChange(request,name,image)
+        trendChange(request,id,name,image)
+
 
 
     return render(request,'display.html',{'name':name,'steps':response[0]['steps'],'image':image,'video':send,'id':id})
@@ -100,6 +112,7 @@ def api_display_internal(request):
         send = requests.get(urls,payloads).json()
         send = send['items'][0]['id']['videoId']
         send = 'https://www.youtube.com/embed/' + send
-        return render(request,'display_internal.html',{'name':name,'steps':steps,'image':image,'video':send,'id':ids})
+        num = len(steps)
+        return render(request,'display_internal.html',{'name':name,'steps':steps,'image':image,'video':send,'id':ids,'num':num})
 
 

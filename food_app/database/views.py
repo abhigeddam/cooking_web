@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from food_app.models import Person_food,Favaorites
+from food_app.models import Person_food,Favaorites,Reciepes
 from django.contrib.auth.models import User
 from .models import Profile
 from food_app.form import *
@@ -31,15 +31,16 @@ def Favdisp(request):
 
 
 def Account(request):
-    if request.method == 'POST':
-        a = {'name':request.POST['name'],'steps':request.POST['steps'],'user_id':User.objects.get(username=request.session.get('user',0))}
-        form = Main_receipe_Form(a, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('api_searchs')
-    else:
-        form = receipe_Form()
-        return render(request,'account.html',{'form':form})
+    data = request.GET
+    username = data.get('username')
+    number = int(data.get('number'))
+    user = User.objects.get(username=username)
+    data = Reciepes.objects.filter(user_id=user)
+    data = data[number*6:min((number+1)*6,len(data))]
+    print(data[0].description,'hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii')
+    return render(request,'Account.html',{'data':data,'number':number})
+
+
 
     
 def Deletefav(request):
@@ -48,7 +49,6 @@ def Deletefav(request):
     user = User.objects.get(username=request.session.get('user',0))
     x = Favaorites.objects.filter(user_id=user,ids=ids).first()
     x.delete()
-    return redirect('Fav')
 
 def Community(request):
     if request.method == 'POST':
@@ -78,3 +78,27 @@ def addfollowers(request):
 
 
 
+def Recipe_submission(request):
+    if request.method == 'POST':
+        steps = request.POST.get('steps')
+        steps = list(steps.split('.'))
+        a = {'name':request.POST['name'],'description':request.POST['description'],'steps':steps,'user_id':User.objects.get(username=request.session.get('user',0))}
+        form = Main_receipe_Form(a, request.FILES)
+        if form.is_valid():
+            form.save()
+            y = request.session.get('id','')
+            user = Profile.objects.get(user__id=y)
+            user.coins += 100
+            user.save()
+            return redirect('api_searchs')
+    else:
+        form = receipe_Form()
+        return render(request,'account.html',{'form':form})
+
+
+
+def Shop(request):
+    y = request.session.get('id','')
+    user = Profile.objects.get(user__id=y)
+    data = {'coins': user.coins,'searches': user.searches_left}
+    return render(request,'shop.html',data)

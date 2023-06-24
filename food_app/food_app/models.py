@@ -34,3 +34,10 @@ class Trending(models.Model):
     item = models.CharField(max_length=99999999)
     ids = models.IntegerField(default=0,blank=True)
     image = models.CharField(max_length=99999999999)
+    time = models.DateTimeField(auto_now_add=True)
+
+class Trend_container(models.Model):
+    ids = models.IntegerField(default=0,blank=True)
+    image = models.CharField(max_length=99999999999)
+    item = models.CharField(max_length=99999999)
+    views = models.IntegerField(default=1,blank=True)

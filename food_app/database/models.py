@@ -9,4 +9,5 @@ class Profile(models.Model):
     searches_left = models.IntegerField(default=0)
     default_searches = models.IntegerField(default=0)
     following = models.ManyToManyField(User,related_name='followers')
+    last_login = models.DateTimeField(auto_now_add=True)
 
