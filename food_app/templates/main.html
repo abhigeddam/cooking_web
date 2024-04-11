@@ -109,28 +109,35 @@
             </button>
           </div>
         </div>
-        <div id="filters">
-          <label for="Cusines">Choose a cusine:</label>
-          <select id="Cusines" name="Cusines">
-            <option value="">None</option>
-            {%for hm in x%}
-            <option value="{{hm.cusine}}">{{hm.cusine}}</option>
-            {%endfor%}
-          </select>
-          <label for="Diets">Choose a Diet:</label>
-          <select id="Diet" name="Diet">
-            <option value="">None</option>
-            {%for hm in y%}
-            <option value="{{hm.diet}}">{{hm.diet}}</option>
-            {%endfor%}
-          </select>
-          <label for="Avoid">Choose Intolerances:</label>
-          <select id="Avoid" name="Avoid">
-            <option value="">None</option>
-            {%for hm in a%}
-            <option value="{{hm.avoid}}">{{hm.avoid}}</option>
-            {%endfor%}
-          </select>
+        <div class="filter-container-container">
+          <div class="filter-container">
+            <div id="filters">
+              <div class="custom-select" style="width: 175px">
+                <select id="Cusines" name="Cusines">
+                  <option value="">Cusines</option>
+                  {%for hm in x%}
+                  <option value="{{hm.cusine}}">{{hm.cusine}}</option>
+                  {%endfor%}
+                </select>
+              </div>
+              <div class="custom-select" style="width: 175px">
+                <select id="Diet" name="Diet">
+                  <option value="">Diet</option>
+                  {%for hm in y%}
+                  <option value="{{hm.diet}}">{{hm.diet}}</option>
+                  {%endfor%}
+                </select>
+              </div>
+              <div class="custom-select" style="width: 175px">
+                <select id="Avoid" name="Avoid">
+                  <option value="">Avoid</option>
+                  {%for hm in a%}
+                  <option value="{{hm.avoid}}">{{hm.avoid}}</option>
+                  {%endfor%}
+                </select>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="contribute">
           <div class="contribute-Text-box">

@@ -19,7 +19,6 @@ def api_post(request):
         Avoid = request.GET.get('avoid')
         data = Reciepes.objects.all().filter(name__contains=search)
         if len(data) > 0:
-            print(data[0].image)
             return render(request, 'search.html',{'response':data,'i':0})
         else:
             payload = {'apiKey':"149a99cd6a4c423886643debcbdec074",'query':search,'cuisine':Cusine,'diet':Diets,'intolerances':Avoid}
