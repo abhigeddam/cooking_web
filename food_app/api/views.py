@@ -75,7 +75,7 @@ def api_display(request):
         url = url + id + '/analyzedInstructions'
         response = requests.get(url,payload).json()
         urls = 'https://youtube.googleapis.com/youtube/v3/search'
-        payloads = {'regionCode':'us','q':name+" recipe",'key':'AIzaSyAwCqp0AE43pxZnyOPjmcE70QJp-92Yli8'}
+        payloads = {'regionCode':'us','q':name+" recipe",'key':''}
         send = requests.get(urls,payloads).json()
         send = send['items'][0]['id']['videoId']
         send = 'https://www.youtube.com/embed/' + send
