@@ -70,7 +70,7 @@ def api_display(request):
         image = data.get('image')
         name = data.get('name')
         ans = data.get('ans')
-        payload = {'apiKey':"149a99cd6a4c423886643debcbdec074"}
+        payload = {'apiKey':""}
         url = 'https://api.spoonacular.com/recipes/'
         url = url + id + '/analyzedInstructions'
         response = requests.get(url,payload).json()
