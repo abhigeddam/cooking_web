@@ -21,7 +21,7 @@ def api_post(request):
         if len(data) > 0:
             return render(request, 'search.html',{'response':data,'i':0})
         else:
-            payload = {'apiKey':"149a99cd6a4c423886643debcbdec074",'query':search,'cuisine':Cusine,'diet':Diets,'intolerances':Avoid}
+            payload = {'apiKey':"",'query':search,'cuisine':Cusine,'diet':Diets,'intolerances':Avoid}
             response = requests.get('https://api.spoonacular.com/recipes/complexSearch',payload)
             response = response.json()
             return render(request, 'search.html',{'response':response['results'],'i':1})
