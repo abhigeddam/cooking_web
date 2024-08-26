@@ -107,7 +107,7 @@ def api_display_internal(request):
         x = Reciepes.objects.all().filter(id=ids).first()
         steps = x.steps
         urls = 'https://youtube.googleapis.com/youtube/v3/search'
-        payloads = {'regionCode':'us','q':name,'key':'AIzaSyAwCqp0AE43pxZnyOPjmcE70QJp-92Yli8'}
+        payloads = {'regionCode':'us','q':name,'key':''}
         send = requests.get(urls,payloads).json()
         send = send['items'][0]['id']['videoId']
         send = 'https://www.youtube.com/embed/' + send
